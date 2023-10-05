@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1 style="display:inline" >Tags</h1>
+  <a style="display:inline" href="{% url "todolist:tag_create" %}" class="btn btn-primary link-to-page float-right">
+    Add
+  </a>
+  <br>
+  <br>
+  {% if tags %}
+    <table class="table">
+      <tr>
+        <th>Name</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+
+      {% for tag in tags %}
+        <tr>
+          <td>
+            {{ tag.name }}
+          </td>
+          <td>
+            <a href="{% url "todolist:tag_update" pk=tag.id %}" class="btn btn-secondary link-to-page">
+              Update
+            </a>
+          </td>
+          <td>
+            <a class="btn btn-secondary link-to-page"
+               href="{% url "todolist:tag_delete" pk=tag.id %}">
+              Delete
+            </a>
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
+
+  {% else %}
+    <p>There are no tags in the list. Create the first one!</p>
+  {% endif %}
+{% endblock %}
